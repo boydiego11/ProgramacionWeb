@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="../static/img/LogoX.png" />
+
+    <title>Login</title>
+  </head>
+
+  <!-- estilos utilizando bootstrap -->
+  <header>
+    <a href="/principal" id="logoButton" class="logo-button">
+      <img src="../static/img/LogoX.png" alt="Logo" class="logo-image" />
+    </a>
+    <style>
+      .logo-button { 
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 10px;
+        padding: 0;
+        border: none;
+        background: none;
+      }
+
+      .logo-image {
+        width: 100px;
+        height: auto;
+      }
+    </style>
+
+  </header>
+  <style>
+    body {
+        background: rgb(22, 14, 88);
+        background-image: radial-gradient(
+            circle at 50% -20.71%,
+            #973898 0,
+            #812a98 16.67%,
+            #661e98 33.33%,
+            #401497 50%,
+            #001196 66.67%,
+            #001396 83.33%,
+            #001696 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: white; /* Cambio de color del texto a blanco */
+    }
+
+    h2 {
+        text-align: center; /* Centrado horizontal del titulo */
+    }
+
+    header {
+        display: flex;
+        justify-content: center; /* Centrado horizontal del header */
+        align-items: center;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .logo-button {
+        margin-right: auto; /* Mueve el logo a la izquierda */
+        padding: 0;
+        border: none;
+        background: none;
+    }
+
+    .logo-image {
+        width: 100px;
+        height: auto;
+    }
+</style>
+  <body>
+    <h2>Login</h2>
+    <div >
+        <form action="" method="post" class="" id="login">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required /><br />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required /><br />
+            <button type="submit" class="boton-submit">Login</button>
+          </form>
+    </div>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+    <script>
+      $(document).ready(function () {
+  $("#login").submit(function (e) {
+    // Evitar que el formulario se envíe automáticamente
+    e.preventDefault();
+
+    // Obtener los valores de los campos del formulario
+    var contrasena = $("#contrasena").val();
+    var flagContrasena = false;
+
+    // Realizar la validación de la contraseña
+    if (contrasena.length >= 6 && contrasena.length <= 18) {
+      if (/\d/.test(contrasena) && /[A-Z]/.test(contrasena)) {
+        if (contrasena == contrasena2) {
+          flagContrasena = true;
+          $("#alert").html("").addClass("d-none");
+        } else {
+          $("#alert").html("Las contraseñas deben ser iguales");
+        }
+      } else {
+        $("#alert")
+          .html("La contraseña debe tener al menos una mayúscula y un número")
+          .removeClass("d-none");
+      }
+    } else {
+      $("#alert")
+        .html("La contraseña debe tener entre 6 y 18 caracteres")
+        .removeClass("d-none");
+    }
+
+    // Redireccionar si la contraseña es válida, mostrar alerta si no
+    if (flagContrasena) {
+      console.log("redirect");
+      window.location.href = "/principal";
+    } else {
+      console.log("campos vacíos");
+      $("#alertaGlobal").html(
+        "Debe ingresar todos los campos obligatorios"
+      );
+    }
+  });
+});
+
+
+
+    </script>
+ 
+
+  </body>
+</html>
