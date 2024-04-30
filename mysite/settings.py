@@ -31,13 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'apiProductos.apps.ApiproductosConfig',
+    'apiUsuarios.apps.ApiusuariosConfig',
+    'myapp.apps.MyAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp.apps.MysiteConfig' ,
 ]
 
 MIDDLEWARE = [
@@ -75,16 +78,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': '(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-santiago-1.oraclecloud.com))(connect_data=(service_name=g566289a2502261_xjuegos_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))',
-        'USER': 'ADMIN',
-        'PASSWORD': 'CamilaLopez1.',
-        'HOST': '',
-        'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.oracle",
+        "NAME": "xe",
+        "USER": "system",
+        "PASSWORD": "12345678",
+        "HOST": "localhost",
+        "PORT": "1521",
     }
 }
-    
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -120,9 +123,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'apiUsuarios.Usuario'
+LOGIN_URL = '/Login'
