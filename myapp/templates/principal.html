@@ -8,10 +8,10 @@
     <script src="https://kit.fontawesome.com/affca5821d.js" crossorigin="anonymous"></script>
     <script src="../static/js/script2.js" defer></script>
     <script src="../static/js/logo.js" defer></script>
-    
+
     <link rel="stylesheet" href="../static/css/styles.css"> <!-- Enlace al archivo CSS separado -->
-    <link rel="shortcut icon" href="../static/img/LogoX.png"/>
-   
+    <link rel="shortcut icon" href="../static/img/LogoX.png" />
+
 </head>
 
 <body>
@@ -19,9 +19,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-4">
 
- 
-
-            <header>
+                <header>
                     <h1 class="colored-letter letter-x">X</h1>
                     <h1 class="colored-letter letter-j">J</h1>
                     <h1 class="colored-letter letter-u">U</h1>
@@ -30,16 +28,24 @@
                     <h1 class="colored-letter letter-o">O</h1>
                     <h1 class="colored-letter letter-s">S</h1>
 
-                    <a href="/principal" id="logoButton" class="logo-button">
+                    <button id="logoButton" class="logo-button">
                         <img src="../static/img/LogoX.png" alt="Logo" class="logo-image">
-                    </a>
+                    </button>
                     <div class="navigation-menu">
-                        <a href= "/Form" id="registration">Registrate!</a>
-                        <a href="/Login"    id="login">Iniciar sesión</a>
+                        <a href="/RAWGAPI" >Información Juegos</a>
+                        <a href="/BOMBAPI" >Información Desarrolladores</a>  
+                        {% if user.is_authenticated %}
+                        <!-- Usuario autenticado, mostrar correo electrónico y opción para cerrar sesión -->
+                        <a href="/editarperfil">{{ user.email }}</a>
+                        <a href="/Logout">Cerrar sesión</a>
                         <a href="/carrito" id="shoppingCart">
                             <i class="fas fa-shopping-cart"></i> Carrito
                             <span id="cartItemCount">0</span>
-                        </a>
+                            {% else %}
+                            <!-- Usuario no autenticado, mostrar opciones de registro e inicio de sesión -->
+                            <a href="/Form">Regístrate!</a>
+                            <a href="/Login">Iniciar sesión</a>
+                            {% endif %}
                     </div>
                 </header>
             </div>
@@ -48,7 +54,7 @@
 
             <div class="col-sm-12 col-md-6 col-lg-4">
 
- 
+
 
                 <nav class="d-flex justify-content-center align-items-center">
 
@@ -81,12 +87,27 @@
 
         </div>
     </div>
-    
-    
-    
+
+
+
     <footer class="text-center">
         <p>¡Bienvenido a XJUEGOS!</p>
 
+
+     <script>
+
+function actualizarContadorCarrito() {
+    fetch('/carrito/cantidad/')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('cartItemCount').textContent = data.cantidad;
+    });
+}
+
+// Llamar a la función al cargar la página
+document.addEventListener('DOMContentLoaded', actualizarContadorCarrito);
+
+     </script>   
 </body>
 
 

@@ -19,7 +19,14 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('agregar-al-carrito/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/cantidad/', views.obtener_cantidad_carrito, name='obtener_cantidad_carrito'),
+     path('carrito/limpiar/', views.limpiar_carrito, name='limpiar_carrito'),
+    path('carrito/pagar/', views.pagar_carrito, name='pagar_carrito'),
+    path('editarperfil', views.editar_perfil, name='editarperfil'),
+    path('Logout', views.logout_view, name='logout'),
     path("", views.index, name="index"),
+    path("formin/", views.login_view, name="formin"),
     path("Login/", views.login, name="login"),
     path("juego5dos/", views.juego5dos, name="juego5dos"),
     path("juego5/", views.juego5, name="juego5"),

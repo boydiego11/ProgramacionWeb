@@ -89,69 +89,27 @@
         width: 100px;
         height: auto;
     }
-</style>
-  <body>
+
+    form{
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        flex-direction: column;
+    }
+    </style>
+<body>
+    
     <h2>Login</h2>
-    <div >
-        <form action="" method="post" class="" id="login">
-            {% csrf_token %}
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required /><br />
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required /><br />
-            <button type="submit" class="boton-submit">Login</button>
-          </form>
-    </div>
+    <form method="post" class="" id="login">
+        {% csrf_token %}
+        <label for="username">Corro Electronico:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Login</button>
+    </form>
     {% if error %}
-    <p>{{ error }}</p>
+        <p>{{ error }}</p>
     {% endif %}
-    <script>
-      $(document).ready(function () {
-  $("#login").submit(function (e) {
-    // Evitar que el formulario se envíe automáticamente
-    e.preventDefault();
-
-    // Obtener los valores de los campos del formulario
-    var contrasena = $("#contrasena").val();
-    var flagContrasena = false;
-
-    // Realizar la validación de la contraseña
-    if (contrasena.length >= 6 && contrasena.length <= 18) {
-      if (/\d/.test(contrasena) && /[A-Z]/.test(contrasena)) {
-        if (contrasena == contrasena2) {
-          flagContrasena = true;
-          $("#alert").html("").addClass("d-none");
-        } else {
-          $("#alert").html("Las contraseñas deben ser iguales");
-        }
-      } else {
-        $("#alert")
-          .html("La contraseña debe tener al menos una mayúscula y un número")
-          .removeClass("d-none");
-      }
-    } else {
-      $("#alert")
-        .html("La contraseña debe tener entre 6 y 18 caracteres")
-        .removeClass("d-none");
-    }
-
-    // Redireccionar si la contraseña es válida, mostrar alerta si no
-    if (flagContrasena) {
-      console.log("redirect");
-      window.location.href = "/principal";
-    } else {
-      console.log("campos vacíos");
-      $("#alertaGlobal").html(
-        "Debe ingresar todos los campos obligatorios"
-      );
-    }
-  });
-});
-
-
-
-    </script>
- 
-
-  </body>
+</body>
 </html>
